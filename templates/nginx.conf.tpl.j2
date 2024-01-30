@@ -52,7 +52,7 @@ http {
 
         location / {
             # use 127.0.0.01 as workaround for avoiding dns resolving in docker
-            proxy_pass $scheme://127.0.0.1:$server_port/$app_destination/;
+            proxy_pass $scheme://127.0.0.1:$server_port$app_destination;
             proxy_set_header Host localhost-1;
             proxy_set_header Connection "";
             proxy_http_version 1.1;
