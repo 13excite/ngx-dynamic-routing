@@ -46,9 +46,13 @@ secure: generate
 ## run: run nginx container
 run: generate
 	@printf "$(OK_COLOR)==> Running nginx container$(NO_COLOR)\n"
-	@printf "$(run_docker)"
 	@$(run_docker)
 
 ## setup: setup project env and requirements
 setup: env deps
 	@printf "$(OK_COLOR)==> Setting up project$(NO_COLOR)\n"
+
+## test: run simple test
+test:
+	@printf "$(OK_COLOR)==> Running tests$(NO_COLOR)\n"
+	@bash test.sh
