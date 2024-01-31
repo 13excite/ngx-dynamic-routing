@@ -19,7 +19,7 @@ DEFAULT_APP_ROOT_DIR = "/usr/share/nginx/html/"
 
 def validate_default_destination_location(default_destination_location):
     """Validate the default destination location"""
-    pattern = re.compile(r'^\/[a-z0-9-]{3,15}$')
+    pattern = re.compile(r'^\/[a-z0-9-]{3,15}\/$')
     if pattern.match(default_destination_location):
         return True
     return False
