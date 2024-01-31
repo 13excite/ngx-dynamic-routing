@@ -9,11 +9,10 @@ from jinja2 import Template
 # path to the template file
 TEMPLATE_PATH = "templates/nginx.conf.tpl.j2"
 
-DEFAULT_DST_LOCATION="/default-route/"
-
 MAX_NGX_WORKER = 8
 NGX_USER = "root"
 
+DEFAULT_DST_LOCATION="/default-route/"
 DEFAULT_APP_ROOT_DIR = "/usr/share/nginx/html/"
 
 
@@ -77,7 +76,6 @@ def main():
                     help='default directory for the app static files',
                     required=False
                     )
-    
 
     args = parser.parse_args()
 
