@@ -1,5 +1,7 @@
 .DEFAULT_GOAL := help
 
+ENV_DIR=env
+
 # nginx config
 nginx_version=1.25
 container_name=cdn-nginx
@@ -11,7 +13,7 @@ run_docker=docker run --name $(container_name)  $(vols) -d  $(ports) nginx:$(ngi
 NO_COLOR=\033[0m
 OK_COLOR=\033[32;01m
 
-.PHONY: lint deps generate help env secure run
+.PHONY: lint deps generate help env secure run setup test
 
 ## lint: run lint via pylint
 lint:
@@ -21,7 +23,7 @@ lint:
 ## deps: install dependencies
 deps:
 	@printf "$(OK_COLOR)==> Installing dependencies$(NO_COLOR)\n"
-	@pip install -r requirements.txt
+	. $(ENV_DIR)/bin/activate && pip install -r requirements.txt
 
 ## help: prints this help message
 help:
@@ -36,7 +38,6 @@ generate:
 ## env: create virtual env
 env:
 	@python3 -m venv $(ENV_DIR)
-	@ source $(ENV_DIR)/bin/activate
 
 ## secure: run gixy security checks
 secure: generate
