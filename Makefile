@@ -1,16 +1,17 @@
 .DEFAULT_GOAL := help
 
-ENV_DIR=env
-
 # nginx config
 nginx_version=1.25
-run_test=docker run --name cdn-nginx  $(vols) nginx:$(nginx_version)
+container_name=cdn-nginx
+vols=-v `pwd`/nginx_dynamic_routes.conf:/etc/nginx/nginx.conf:ro -v`pwd`/html:/usr/share/nginx/html
+ports=-p 8080:8080
+run_docker=docker run --name $(container_name)  $(vols) -d  $(ports) nginx:$(nginx_version)
 
-# Terminal colors config
+# terminal colors config
 NO_COLOR=\033[0m
 OK_COLOR=\033[32;01m
 
-.PHONY: lint deps generate help env secure
+.PHONY: lint deps generate help env secure run
 
 ## lint: run lint via pylint
 lint:
@@ -41,3 +42,13 @@ env:
 secure: generate
 	@printf "$(OK_COLOR)==> Running gixy security checks$(NO_COLOR)\n"
 	@gixy nginx_dynamic_routes.conf
+
+## run: run nginx container
+run: generate
+	@printf "$(OK_COLOR)==> Running nginx container$(NO_COLOR)\n"
+	@printf "$(run_docker)"
+	@$(run_docker)
+
+## setup: setup project env and requirements
+setup: env deps
+	@printf "$(OK_COLOR)==> Setting up project$(NO_COLOR)\n"
