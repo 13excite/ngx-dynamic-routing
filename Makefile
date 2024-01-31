@@ -48,7 +48,7 @@ run: generate
 	@printf "$(OK_COLOR)==> Running nginx container$(NO_COLOR)\n"
 	@$(run_docker)
 
-## setup: setup project env and requirements
+## setup: setup virtual env and requirements
 setup: env deps
 	@printf "$(OK_COLOR)==> Setting up project$(NO_COLOR)\n"
 
