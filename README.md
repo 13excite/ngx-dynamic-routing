@@ -30,7 +30,8 @@ Usage:
 
 `make generate` - used for generating nginx config
 
-`make setup` - used for creating virtual env and install requirements.
+`make setup` - used for creating virtual env and install requirements. Don't
+forget to activate venv `source env/bin/activate`.
 
 ## Test
 
